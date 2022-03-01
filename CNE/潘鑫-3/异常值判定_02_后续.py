@@ -1,21 +1,17 @@
-﻿#coding=utf-8
+﻿# coding=utf-8
 
 import pandas as pd
 
-import pandas as pd
 pd.set_option('expand_frame_repr', False)
 pd.set_option('display.max_rows', 10000000)
 pd.set_option('display.max_columns', 10000000)
 pd.set_option('max_colwidth', 10000000)
-import openpyxl
-import pymysql
-import datetime,time
-nows=datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S')
+import datetime
 
+nows = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S')
 
 print(datetime.date.today())
-import numpy as np
-
+print('women doushi haohaizi')
 filePath = r'C:\Users\hp\Desktop\cujia-11data\02_出库-装车.csv'
 df = pd.read_csv(filePath)
 print(df.head())
