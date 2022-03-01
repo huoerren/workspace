@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="61b72b3e-e97a-40d2-87ad-d6034d807e0e" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="22qpdXAC7hipe9CGwVKvgM4geKf" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager">
+    <configuration name="内单号颗粒度时间和时效_非常重要-规整" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="潘鑫-2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内单号颗粒度时间和时效_非常重要-规整.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.内单号颗粒度时间和时效_非常重要-规整" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="61b72b3e-e97a-40d2-87ad-d6034d807e0e" name="Default Changelist" comment="" />
+      <created>1640575058772</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1640575058772</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="940" y="386" key="#Inspections" timestamp="1640575304522">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="940" y="386" key="#Inspections/0.0.2560.1400@0.0.2560.1400" timestamp="1640575304522" />
+    <state x="1581" y="321" key="#内单号颗粒度时间和时效_非常重要-规整" timestamp="1640575185228">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1581" y="321" key="#内单号颗粒度时间和时效_非常重要-规整/0.0.2560.1400@0.0.2560.1400" timestamp="1640575185228" />
+    <state width="1880" height="420" key="GridCell.Tab.0.bottom" timestamp="1640605698641">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1880" height="420" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1640605698641" />
+    <state width="1880" height="420" key="GridCell.Tab.0.center" timestamp="1640605698640">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1880" height="420" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1640605698640" />
+    <state width="1880" height="420" key="GridCell.Tab.0.left" timestamp="1640605698640">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1880" height="420" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1640605698640" />
+    <state width="1880" height="420" key="GridCell.Tab.0.right" timestamp="1640605698640">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1880" height="420" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1640605698640" />
+    <state x="1199" y="369" key="SettingsEditor" timestamp="1640575332834">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1199" y="369" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1640575332834" />
+  </component>
+</project>
