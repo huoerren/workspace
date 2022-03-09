@@ -31,9 +31,9 @@ def execude_sql(SQL):
     return df
 
 
-dateStr = """ BETWEEN '2022-01-30 16:00:00' and '2022-02-06 16:00:00'   """
+dateStr = """ BETWEEN '2022-02-13 16:00:00' and '2022-02-20 16:00:00'   """
 channelCode = """ 'CNE尾程清派' """
-desList = ['MX']
+desList = ['IT']
 
 # 'IT'   # 周一到周五
 def forIT(received_time,complete_time):
@@ -522,16 +522,16 @@ def getAcount(i):
 
     # 总的 ： 落地--妥投
     d_luodi_tuotou = pd.merge(df_luodi, df_tuotou[["内单号", "妥投时间"]], left_on="内单号", right_on="内单号", how='inner')
-    # d_luodi_tuotou['用时'] = d_luodi_tuotou.apply(lambda x: forIT(x['落地时间'], x['妥投时间']), axis=1 )# 针对IT
-    d_luodi_tuotou['用时'] = d_luodi_tuotou.apply(lambda x: forMX(x['落地时间'], x['妥投时间']), axis=1)# 针对MX
+    d_luodi_tuotou['用时'] = d_luodi_tuotou.apply(lambda x: forIT(x['落地时间'], x['妥投时间']), axis=1 )# 针对IT
+    # d_luodi_tuotou['用时'] = d_luodi_tuotou.apply(lambda x: forMX(x['落地时间'], x['妥投时间']), axis=1)# 针对MX
     df3 = d_luodi_tuotou.sort_values(by=["用时"], ascending=True)
     print('落地--妥投')
     print(df3.describe(percentiles=[0.95]))
 
     #   落地 - 清关（海关放行）
     d_luodi_qingguan  =  pd.merge(df_luodi, df_haiguangfangxing[["内单号", "放行时间"]], left_on="内单号", right_on="内单号", how='inner')
-    # d_luodi_qingguan['用时'] = d_luodi_qingguan.apply(lambda x: forIT(x['落地时间'], x['放行时间']), axis=1)# 针对IT
-    d_luodi_qingguan['用时'] = d_luodi_qingguan.apply(lambda x: forMX_02(x['落地时间'], x['放行时间']), axis=1)# 针对MX
+    d_luodi_qingguan['用时'] = d_luodi_qingguan.apply(lambda x: forIT(x['落地时间'], x['放行时间']), axis=1)# 针对IT
+    # d_luodi_qingguan['用时'] = d_luodi_qingguan.apply(lambda x: forMX_02(x['落地时间'], x['放行时间']), axis=1)# 针对MX
     df4 = d_luodi_qingguan.sort_values(by=["用时"], ascending=True)
     print('落地 - 清关（海关放行）')
     print(df4.describe(percentiles=[0.95]))
@@ -539,8 +539,8 @@ def getAcount(i):
 
     #   清关- 抵达末端派送中心（交付）
     d_didaPaisongCen_haiguangfangxing = pd.merge(df_haiguangfangxing, df_didaPaisongCen[["内单号", "抵达派送中心时间"]], left_on="内单号", right_on="内单号", how='inner')
-    # d_didaPaisongCen_haiguangfangxing['用时'] = d_didaPaisongCen_haiguangfangxing.apply(lambda x: forIT(x['放行时间'], x['抵达派送中心时间']), axis=1)# 针对IT
-    d_didaPaisongCen_haiguangfangxing['用时'] = d_didaPaisongCen_haiguangfangxing.apply(lambda x: forMX(x['放行时间'], x['抵达派送中心时间']), axis=1)# 针对MX
+    d_didaPaisongCen_haiguangfangxing['用时'] = d_didaPaisongCen_haiguangfangxing.apply(lambda x: forIT(x['放行时间'], x['抵达派送中心时间']), axis=1)# 针对IT
+    # d_didaPaisongCen_haiguangfangxing['用时'] = d_didaPaisongCen_haiguangfangxing.apply(lambda x: forMX(x['放行时间'], x['抵达派送中心时间']), axis=1)# 针对MX
     df5 = d_didaPaisongCen_haiguangfangxing.sort_values(by=["用时"], ascending=True)
     print('清关- 抵达末端派送中心（交付）')
     print(df5.describe(percentiles=[0.95]))
@@ -548,8 +548,8 @@ def getAcount(i):
 
     #    交付 - 妥投
     d_jiaofu_tuotou =  pd.merge(df_didaPaisongCen, df_tuotou[["内单号", "妥投时间"]], left_on="内单号", right_on="内单号", how='inner')
-    # d_jiaofu_tuotou['用时'] = d_jiaofu_tuotou.apply(lambda x: forIT(x['抵达派送中心时间'], x['妥投时间']), axis=1)# 针对IT
-    d_jiaofu_tuotou['用时'] = d_jiaofu_tuotou.apply(lambda x: forMX(x['抵达派送中心时间'], x['妥投时间']), axis=1)  # 针对MX
+    d_jiaofu_tuotou['用时'] = d_jiaofu_tuotou.apply(lambda x: forIT(x['抵达派送中心时间'], x['妥投时间']), axis=1)# 针对IT
+    # d_jiaofu_tuotou['用时'] = d_jiaofu_tuotou.apply(lambda x: forMX(x['抵达派送中心时间'], x['妥投时间']), axis=1)  # 针对MX
     df6 = d_jiaofu_tuotou.sort_values(by=["用时"], ascending=True)
     print('交付 - 妥投')
     print(df6.describe(percentiles=[0.95]))

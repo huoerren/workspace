@@ -26,9 +26,7 @@ def Month_12_youxian_KPI():
 
 def Month_12_wish_youxian():
     bar = Bar(init_opts=opts.InitOpts(theme='light', width='2300px', height='1000px'))
-    bar.add_xaxis([ 'NL','DE','IT','CZ','US','GB'
- ])
-    # stack值一样的系列会堆叠在一起
+    bar.add_xaxis([ 'NL','DE','IT','CZ','US','GB' ])
     bar.add_yaxis('首扫-封袋',  [ 0.38,0.34,0.31,0.83,0.7,0.28 ], stack='stack1' , bar_min_height=50,bar_min_width=55 )
     bar.add_yaxis('封袋-装车',  [ 1.33,1.39,2.17,3.07,5.53,1.01 ], stack='stack1' , bar_min_height=50,bar_min_width=55)
     bar.add_yaxis('装车-起飞',  [ 1.84,1.18,1.09,1.12,1.69,2.36 ], stack='stack1'  , bar_min_height=50,bar_min_width=55)
@@ -40,9 +38,7 @@ def Month_12_wish_youxian():
     bar.set_global_opts(xaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts( formatter="{value}天", font_size=25),  type_='value' ),
                         yaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(font_size=25)),
                         legend_opts=opts.LegendOpts(item_width=45, item_height=30,
-                                                    textstyle_opts=opts.TextStyleOpts(font_family="微软雅黑",
-                                                                                      font_size="23")))
-
+                                                    textstyle_opts=opts.TextStyleOpts(font_family="微软雅黑", font_size="23")))
     bar.set_series_opts(label_opts=opts.LabelOpts(position='inside', font_size=23, color='black'), )
 
     bar.reversal_axis()
@@ -65,20 +61,17 @@ def Month_12_wish_tehui():
     bar.set_global_opts(xaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts( formatter="{value}天", font_size=25),  type_='value'),
                         yaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(font_size=25)),
                         legend_opts=opts.LegendOpts(item_width=45, item_height=30,
-                                                    textstyle_opts=opts.TextStyleOpts(font_family="微软雅黑",
-                                                                                      font_size="23")))
+                                                    textstyle_opts=opts.TextStyleOpts(font_family="微软雅黑", font_size="23")))
 
     bar.set_series_opts(label_opts=opts.LabelOpts(position='inside', font_size=25, color='black'), )
 
     bar.reversal_axis()
     return bar
 
-# chart = Month_12_tehui()
-# chart.render('12_Month_tehui_demo_01.html')
+
 def Month_12_cujia_tehui():
     bar = Bar(init_opts=opts.InitOpts(theme='light', width='2300px', height='1000px'))
-    bar.add_xaxis(['GR','HU','LT','PL','RO','SE','SK'
-])
+    bar.add_xaxis(['GR','HU','LT','PL','RO','SE','SK'])
     # stack值一样的系列会堆叠在一起
     bar.add_yaxis('首扫-封袋',  [1.535,1.04,1.1,1.1,2.65,1.11,1.69], stack='stack1' , bar_min_height=50,bar_min_width=55 )
     bar.add_yaxis('封袋-装车',  [2.41,4.3,1.37,2.06,1.76,1.95,1.47], stack='stack1' , bar_min_height=50,bar_min_width=55 )
@@ -112,9 +105,7 @@ def Month_12_wish_quanqiutong_guahao():
 
     bar.set_global_opts(xaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts( formatter="{value}天", font_size=25),  type_='value'),
                         yaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(font_size=25)),
-                        legend_opts=opts.LegendOpts(item_width=45, item_height=30,
-                                                    textstyle_opts=opts.TextStyleOpts(font_family="微软雅黑",
-                                                                                      font_size="23")))
+                        legend_opts=opts.LegendOpts(item_width=45, item_height=30, textstyle_opts=opts.TextStyleOpts(font_family="微软雅黑", font_size="23")))
 
     bar.set_series_opts(label_opts=opts.LabelOpts(position='inside', font_size=25, color='black'), )
 
@@ -156,8 +147,8 @@ def Month_12_quanqiutongGuaHao():
 if __name__ == '__main__':
     # pass
     # Month_12_wish_youxian().render('12_Month_wish_优先.html')
-    # Month_12_wish_tehui().render('12_Month_wish_特惠.html')
-    Month_12_wish_quanqiutong_guahao().render('12_Month_wish_全球通挂号.html')
+    Month_12_wish_tehui().render('12_Month_wish_特惠.html')
+    # Month_12_wish_quanqiutong_guahao().render('12_Month_wish_全球通挂号.html')
     # Month_12_cujia_youxian().render('12_Month_促佳_优先.html')
     # Month_12_cujia_tehui().render('12_Month_促佳_特惠.html')
 

@@ -230,7 +230,7 @@ def getOrderNoes():
 
 
 
-    # -- 海光放行 end ------------------------------
+    # -- 海关放行 end ------------------------------
 
     # 起飞
     S5 = """
@@ -246,7 +246,7 @@ def getOrderNoes():
         and lgo.is_deleted='n'
         and   tme.is_deleted='n'
         and lgo.mawb_id=tme.mawb_id
-        and event_code in ("SDFO","DEPC","DEPT","LKJC",'SYFD','SYYF','PMWC')
+        and event_code in ('SDFO','DEPC','DEPT','LKJC','SYFD','SYYF','PMWC')
     """.format(noes_02)
 
     print('------------ 起飞情况 -----------')
@@ -272,7 +272,7 @@ def getOrderNoes():
         and lgo.is_deleted='n'
         and tme.is_deleted='n'
         and lgo.mawb_id=tme.mawb_id
-        and event_code in ("ARIR","ABCD","ABAD","AECD","ARMA")
+        and event_code in ('ARIR','ABCD','ABAD','AECD','ARMA')
         """.format(noes_02)
     print('------ 主单落地 --------')
 
@@ -464,6 +464,50 @@ def getOrderNoes():
     result_07 = pd.merge(result_06, d8, on=['内单号'], how='left')
 
     result_08 = pd.merge(result_07, d9, on=['内单号'], how='left')
+
+    print('----------------------- 分割线 start : -----------------------------')
+    print(result_08.columns.tolist())
+    result_08['首扫时间'] = pd.to_datetime(result_08['首扫时间'])
+    result_08['封袋时间'] = pd.to_datetime(result_08['封袋时间'])
+    result_08['装车时间'] = pd.to_datetime(result_08['装车时间'])
+    result_08['到达机场出口时间'] = pd.to_datetime(result_08['到达机场出口时间'])
+    result_08['海关放行出口时间'] = pd.to_datetime(result_08['海关放行出口时间'])
+    result_08['起飞时间'] = pd.to_datetime(result_08['起飞时间'])
+    result_08['落地时间'] = pd.to_datetime(result_08['落地时间'])
+    result_08['进口清关时间'] = pd.to_datetime(result_08['进口清关时间'])
+    result_08['交付时间'] = pd.to_datetime(result_08['交付时间'])
+    result_08['妥投时间'] = pd.to_datetime(result_08['妥投时间'])
+
+    result_08["首扫-封袋_用时"] = (result_08["封袋时间"] - result_08["首扫时间"]).astype('timedelta64[s]')
+    result_08["首扫-封袋_用时"] = round(result_08["首扫-封袋_用时"] / 86400, 2)
+
+    result_08["封袋-装车_用时"] = (result_08["装车时间"] - result_08["封袋时间"]).astype('timedelta64[s]')
+    result_08["封袋-装车_用时"] = round(result_08["封袋-装车_用时"] / 86400, 2)
+
+    result_08["装车-到达机场_用时"] = (result_08["到达机场出口时间"] - result_08["装车时间"]).astype('timedelta64[s]')
+    result_08["装车-到达机场_用时"] = round(result_08["装车-到达机场_用时"] / 86400, 2)
+
+    result_08["到达机场-海关放行出口_用时"] = (result_08["海关放行出口时间"] - result_08["到达机场出口时间"]).astype('timedelta64[s]')
+    result_08["到达机场-海关放行出口_用时"] = round(result_08["到达机场-海关放行出口_用时"] / 86400, 2)
+
+    result_08["海关放行出口-起飞_用时"] = (result_08["起飞时间"] - result_08["海关放行出口时间"]).astype('timedelta64[s]')
+    result_08["海关放行出口-起飞_用时"] = round(result_08["海关放行出口-起飞_用时"] / 86400, 2)
+
+    result_08["起飞-落地_用时"] = (result_08["落地时间"] - result_08["起飞时间"]).astype('timedelta64[s]')
+    result_08["起飞-落地_用时"] = round(result_08["起飞-落地_用时"] / 86400, 2)
+
+    result_08["落地-进口清关_用时"] = (result_08["进口清关时间"] - result_08["落地时间"]).astype('timedelta64[s]')
+    result_08["落地-进口清关_用时"] = round(result_08["落地-进口清关_用时"] / 86400, 2)
+
+    result_08["进口清关-交付_用时"] = (result_08["交付时间"] - result_08["进口清关时间"]).astype('timedelta64[s]')
+    result_08["进口清关-交付_用时"] = round(result_08["进口清关-交付_用时"] / 86400, 2)
+
+    result_08["交付-妥投_用时"] = (result_08["妥投时间"] - result_08["交付时间"]).astype('timedelta64[s]')
+    result_08["交付-妥投_用时"] = round(result_08["交付-妥投_用时"] / 86400, 2)
+
+    print('----------------------- 分割线 end  -----------------------------')
+
+
     result_08.to_excel('result.xlsx' , index=False )
 
 

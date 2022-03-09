@@ -34,10 +34,10 @@ cur = con.cursor()
 nows=datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S')
 
 # days="BETWEEN '2021-12-31 16:00:00' and "+"'"+nows+"'"
-days = """ BETWEEN '2022-02-06 16:00:00' and '2022-02-13 16:00:00'   """
+days = """ BETWEEN '2022-02-13 16:00:00' and '2022-02-20 16:00:00'   """
 bag_no=pd.read_excel(r'C:\Users\hp\Desktop\ebay大包号.xlsx')
 tp_bag=tuple(bag_no['bag_no'].tolist())
-
+print(tp_bag)
 S0="""
 SELECT order_no
 from lg_order lgo,lg_bag_order_relation lbor,lg_bag lgb
@@ -394,7 +394,20 @@ total['离开转运中心用时']=total.apply(lambda x:forMX(x['抵达转运中�
 
 #海关放行-进口”---“妥投
 total['妥投用时']=total.apply(lambda x:forMX(x['离开转运中心时间'],x['妥投时间']),axis=1)
-total.to_excel("./测试.xlsx")
+
+# total.to_excel("./测试.xlsx")
+# df = pd.read_excel('测试.xlsx')
 
 
+sub_01 = total.dropna(subset=["装车用时"]) # 通过参数来删除age和sex中含有空数据的全部
+sub_01_2 = sub_01.sort_values(by=["装车用时"], ascending=True)
+print(sub_01_2.describe(percentiles=[0.95])['装车用时'])
+print('-------------')
 
+sub_02 = total.dropna(subset=["起飞用时"]) # 通过参数来删除age和sex中含有空数据的全部
+sub_02_2 = sub_02.sort_values(by=["起飞用时"], ascending=True)
+print(sub_02_2.describe(percentiles=[0.95])['起飞用时'])
+print('-------------')
+sub_03 = total.dropna(subset=["飞行用时"]) # 通过参数来删除age和sex中含有空数据的全部
+sub_03_2 = sub_03.sort_values(by=["飞行用时"], ascending=True)
+print(sub_02_2.describe(percentiles=[0.95])['飞行用时'])
