@@ -4,17 +4,14 @@
 # In[3]:
 
 
-import pandas as pd
+import datetime
+
 import numpy as np
-import openpyxl
+import pandas as pd
 import pymysql
-import datetime,time
-
-
-from dateutil.parser import parse
 from business_duration import businessDuration
 from dateutil import rrule
-
+from dateutil.parser import parse
 
 
 def execude_sql(SQL):
@@ -34,8 +31,8 @@ cur = con.cursor()
 nows=datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S')
 
 # days="BETWEEN '2021-12-31 16:00:00' and "+"'"+nows+"'"
-days = """ BETWEEN '2022-02-13 16:00:00' and '2022-02-20 16:00:00'   """
-bag_no=pd.read_excel(r'C:\Users\hp\Desktop\ebay大包号.xlsx')
+days = """ BETWEEN '2022-03-06 16:00:00' and '2022-03-13 16:00:00'   """
+bag_no = pd.read_excel(r'C:\Users\hp\Desktop\ebay大包号.xlsx')
 tp_bag=tuple(bag_no['bag_no'].tolist())
 print(tp_bag)
 S0="""

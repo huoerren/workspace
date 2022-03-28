@@ -1,6 +1,7 @@
+import datetime
+
 import pandas as pd
 import pymysql
-import datetime
 
 nows = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S')
 
@@ -34,7 +35,10 @@ group by
 order by c desc
 """.format(days)
 
-s2="""
+print('------------------ s1  ---------------')
+print(s1)
+
+s2 = """
 SELECT  channel_code,status,  des,date_format(date_add(gmt_create,interval 8 hour),'%Y-%m-%d') as datetime,  
 count( 1 ) c ,customer_id 
 FROM  lg_pre_order lpo  
@@ -42,10 +46,12 @@ WHERE  lpo.gmt_create > '2021-07-31 16:00:00'
 AND lpo.platform="DHLINK"
 AND lpo.channel_code IN ("CNE经济专线DH","CNE特惠专线DH","CNE优先专线DH")
 and is_deleted= 'n'   
-GROUP BY  channel_code,  des ,datetime,status,customer_id 
-ORDER BY  c DESC 
+GROUP BY channel_code,  des ,datetime,status,customer_id 
+ORDER BY c DESC 
 """.format(days)
 
+print('------------------ s2 ---------------')
+print(s2)
 
 # 正式单
 s3 = """SELECT 
@@ -63,8 +69,8 @@ AND lgo.platform="DHLINK"
 AND lgo.channel_code IN ("CNE经济专线DH","CNE特惠专线DH","CNE优先专线DH")
 and lgo.is_deleted='n'
 """
-
-
+print('------------------ s3  ---------------')
+print(s3)
 
 # 退件
 s4 = """SELECT 
@@ -89,7 +95,8 @@ AND toe.event_code IN  ('GNTJ',     'GYST',     'TKDZ','JCTJ','CFDG',     'CTBY'
 'CSIN','HGCY','HJFX','GNCY','HGYC','CKCY','HGXH')
 """
 
-
+print('------------------ s4 ---------------')
+print(s4)
 
 
 def execude_sql(SQL):

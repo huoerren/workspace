@@ -6,7 +6,11 @@
     <mapping directory="$PROJECT_DIR$/项目测试_github/PVA" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/项目测试_github/TikTokDownload" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/项目测试_github/TimeSeriesPrediction" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/项目测试_github/chinamap-coloring" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/项目测试_github/fruit_detection" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/项目测试_github/pyecharts_geo" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/项目测试_github/pyecharts_geo_很重要" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/项目测试_github/tianchi_haiyang" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/项目测试_github/去除水印/Tiktok-watermark" vcs="Git" />
   </component>
 </project>

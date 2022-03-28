@@ -4,9 +4,8 @@ pd.set_option('expand_frame_repr', False)
 pd.set_option('display.max_rows', 10000000)
 pd.set_option('display.max_columns', 10000000)
 pd.set_option('max_colwidth', 10000000)
-import openpyxl
 import pymysql
-import datetime, time
+import datetime
 from dateutil.parser import parse
 from business_duration import businessDuration
 from dateutil import rrule
@@ -31,7 +30,7 @@ def execude_sql(SQL):
     return df
 
 
-dateStr = """ BETWEEN '2022-02-13 16:00:00' and '2022-02-20 16:00:00'   """
+dateStr = """ BETWEEN '2022-03-06 16:00:00' and '2022-03-13 16:00:00'   """
 channelCode = """ 'CNE尾程清派' """
 desList = ['IT']
 

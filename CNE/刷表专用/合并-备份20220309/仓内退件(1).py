@@ -1,4 +1,5 @@
 import pandas as pd
+
 pd.set_option('expand_frame_repr', False)
 pd.set_option('display.max_rows', 10000000)
 pd.set_option('display.max_columns', 10000000)
@@ -8,27 +9,24 @@ import pymysql
 import re
 
 # #数仓连接
-con = pymysql.connect(host="139.198.189.25",port=44000,user="cnereader",passwd="read51096677",charset="utf8",autocommit=True)
+con = pymysql.connect(host="139.198.189.25", port=44000, user="cnereader", passwd="read51096677", charset="utf8",
+                      autocommit=True)
 cur = con.cursor()
 
 # days="BETWEEN '2021-04-05 16:00:00' and '"+time_yes+"'"
-days="BETWEEN '2021-07-31 16:00:00' and now()"
+days = "BETWEEN '2021-07-31 16:00:00' and now()"
 # days="BETWEEN '2021-3-31 16:00:00' and '2021-04-30 16:00:00'"
 
 
-s1= """
-(SELECT 
-lgo.platform ,
-lgo.order_no,toe.event_code,customer_id,
+s1 = """
+SELECT lgo.order_no,toe.event_code,customer_id,
 tec1.track_status, tec1.event_cn_desc 事件描述,   tec1.event_en_desc,
-date_add(toe.event_time,interval 8 hour) tjdate,lgo.order_status
-,date_format(lgo.gmt_create,'%Y-%m-%d') ywdate 
-
+date_add(toe.event_time,interval 8 hour) tjdate,lgo.order_status 
 FROM logisticscore.lg_order lgo
 INNER JOIN logisticscore.track_order_event toe on lgo.id = toe.order_id
 INNER JOIN logisticscore.track_event_code tec1 on toe.event_code = tec1.event_code 
 WHERE   lgo.gmt_create {}
-and ((customer_id in ('3161297','3282094') ) or (platform='JDW') )
+and  customer_id in ('3161297','3282094')  
 and lgo.is_deleted= 'n'
 and toe.is_deleted= 'n'
 and tec1.is_deleted= 'n'
@@ -36,40 +34,25 @@ and tec1.event_en_desc!='-1'
 AND toe.event_code IN 
 ( 'GNTJ', 'GYST', 'TKDZ', 'JCTJ', 'CFDG', 'CTBY', 'ATIN', 'CZLL', 'CHIC', 'YCJJ', 'LJIE', 'DIBJ', 'BGPS', 'SIRC', 'GNTJ','CSHD',
 'CSIN','HGCY','HJFX','GNCY','HGYC','CKCY','HGXH')
- )
- 
- union all 
- (
- SELECT 
-lgo.platform,
-lgo.order_no,
-toe.event_code,
-customer_id,
-tec1.track_status, 
-tec1.event_cn_desc 事件描述,   
-tec1.event_en_desc,
-date_add(toe.event_time,interval 8 hour) tjdate,
-lgo.order_status ,
-date_format(lgo.gmt_create,'%Y-%m-%d') ywdate
+UNION ALL
 
+(SELECT lgo.order_no,toe.event_code,customer_id,
+tec1.track_status, tec1.event_cn_desc 事件描述,   tec1.event_en_desc,
+date_add(toe.event_time,interval 8 hour) tjdate,lgo.order_status 
 FROM logisticscore.lg_order lgo
 INNER JOIN logisticscore.track_order_event toe on lgo.id = toe.order_id
 INNER JOIN logisticscore.track_event_code tec1 on toe.event_code = tec1.event_code 
-WHERE   lgo.gmt_create >='2021-07-31 16:00:00'  
-AND lgo.platform="DHLINK" 
+WHERE   lgo.gmt_create {}
+and platform='JDW'
 and lgo.is_deleted= 'n'
 and toe.is_deleted= 'n'
 and tec1.is_deleted= 'n'
 and tec1.event_en_desc!='-1' 
-AND lgo.channel_code IN ("CNE经济专线DH","CNE特惠专线DH","CNE优先专线DH")
-AND toe.event_code IN  ('GNTJ', 'GYST', 'TKDZ','JCTJ','CFDG', 'CTBY', 'ATIN', 'CZLL', 'CHIC', 'YCJJ', 'LJIE', 'DIBJ', 'BGPS', 'SIRC', 'GNTJ','CSHD',
-'CSIN','HGCY','HJFX','GNCY','HGYC','CKCY','HGXH')
- 
- )
- 
-""".format(days)
-print('------------- s1 -----------')
-print(s1)
+AND toe.event_code IN 
+( 'GNTJ', 'GYST', 'TKDZ', 'JCTJ', 'CFDG', 'CTBY', 'ATIN', 'CZLL', 'CHIC', 'YCJJ', 'LJIE', 'DIBJ', 'BGPS', 'SIRC', 'GNTJ','CSHD',
+'CSIN','HGCY','HJFX','GNCY','HGYC','CKCY','HGXH'))
+
+""".format(days, days)
 
 
 def execude_sql(SQL):
@@ -81,24 +64,21 @@ def execude_sql(SQL):
     return df
 
 
+print('-------------------- s1 -------------')
+print(s1)
+
 d1 = execude_sql(s1)
-
-d1.loc[d1['platform'] == 'MYSHOP', 'customer_id'] = '兰亭集势'
-d1.loc[d1['platform'] == 'OTHER', 'customer_id'] = '促佳'
-d1.loc[d1['platform'] == 'DHLINK', 'customer_id'] = '敦煌'
+# print(d1)
+d1.loc[d1['customer_id'] == 3161297, 'customer_id'] = '兰亭集势'
+d1.loc[d1['customer_id'] == 3282094, 'customer_id'] = '促佳'
 d1['项目名称'] = d1.apply(
-    lambda row: "兰亭集势" if row['customer_id'] == '兰亭集势' else (
-        '促佳' if row['customer_id'] == '促佳' else ('敦煌' if row['customer_id'] == '敦煌' else "京东")), axis=1)
-
+    lambda row: "兰亭集势" if row['customer_id'] == '兰亭集势' else ('促佳' if row['customer_id'] == '促佳' else "京东"), axis=1)
 # 删除“仓库”
 # d1.loc[d1[d1['事件描述'].str.contains('仓库')].index,'退件位置']='仓外'
 # '仓外'
 print('-------------------- d1 是最原始的数据 -----------------------')
 print(d1.shape)
-# add by panxin 20220310
-print(d1.columns.tolist())
-d1 = d1[['order_no', 'event_code', 'customer_id', 'track_status', '事件描述', 'event_en_desc', 'tjdate', 'order_status',
-         'ywdate', '项目名称']]
+
 d1['退件位置'] = d1['事件描述'].apply(lambda x: re.search(r'仓库|海关', x, ))
 
 print(d1.shape)
@@ -110,8 +90,8 @@ d1_ck = d1_ck.dropna(axis=0, how='any')
 print('---------------- d1_ck.shape：后 ---------------')
 print(d1_ck.shape)
 
-d1_ck['退件位置']='仓外'
-d1_ck=d1_ck.drop_duplicates(subset=['order_no'], keep='last')
+d1_ck['退件位置'] = '仓外'
+d1_ck = d1_ck.drop_duplicates(subset=['order_no'], keep='last')
 print('=============== d1_ck.shape ============')
 print(d1_ck.shape)
 # 之前版本
@@ -129,28 +109,22 @@ print(d1_ck.shape)
 print('------------------ d1.head() -----------------')
 print(d1.head())
 
-d2=d1.drop(['退件位置'],axis=1)
+d2 = d1.drop(['退件位置'], axis=1)
 print('------------------ d2.head() ----------------------------')
 
-
-
-d2=d2.sort_values(by=['order_no','tjdate'],ascending=True)
+d2 = d2.sort_values(by=['order_no', 'tjdate'], ascending=True)
 # print(d2)
-d3=d2.drop_duplicates(subset=['order_no'], keep='last')#去除id重复项
-d3=pd.merge(d3,d1_ck,on='order_no',how='left')
-d3['退件位置']=d3['退件位置'].fillna('仓内')
-
+d3 = d2.drop_duplicates(subset=['order_no'], keep='last')  # 去除id重复项
+d3 = pd.merge(d3, d1_ck, on='order_no', how='left')
+d3['退件位置'] = d3['退件位置'].fillna('仓内')
 
 # d3.loc[d3[d3['位置']=='仓外'].index,'退件位置']='仓外'
 # d3.drop(['位置'],axis=1,inplace=True)
 print(d3.head())
 
-print(d3.columns.tolist())
-
-bf =r'D:\PBI\BI\合并退件\当期数据\合并仓内去重.xlsx'
+bf = r'D:\PBI\BI\合并退件\当期数据\合并仓内去重.xlsx'
 writer = pd.ExcelWriter(bf)
-d3.to_excel(writer,'去重',index=False)
+d3.to_excel(writer, '去重', index=False)
 # d1.to_excel(writer,'原数据',index=False)
 
 writer.save()
-
