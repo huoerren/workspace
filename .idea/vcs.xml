@@ -2,6 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/CNE我的收集" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/项目测试_github/Logistics-Demand-Forecasting-By-Python" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/项目测试_github/PVA" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/项目测试_github/TikTokDownload" vcs="Git" />
