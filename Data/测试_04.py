@@ -1,9 +1,11 @@
-﻿from business_duration import businessDuration
-from dateutil import rrule
+﻿import datetime
+
 import pandas as pd
-import datetime
+from business_duration import businessDuration
+from dateutil import rrule
 
 
+# 这是什么操作啊
 
 # 'IT'   # 周一到周五
 def forIT():
