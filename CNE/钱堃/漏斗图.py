@@ -5,14 +5,10 @@
 
 
 import pandas as pd
-import numpy as np
-import openpyxl
 import pymysql
-import datetime,time
-
 
 # In[2]:
-
+# 这是什么操作啊
 
 con = pymysql.connect(host="139.198.189.25",port=44000,user="cnereader",passwd="read51096677",charset="utf8",autocommit=True,database='logisticscore')
 cur = con.cursor()
